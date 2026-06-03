@@ -1,7 +1,7 @@
 const board = document.getElementById("board");
 
-const rows = 2;   // move back up when done testing 
-const cols = 2;   // same as above ho you know how to read
+const rows = 2;
+const cols = 2;
 
 const boardWidth = 1000;
 const boardHeight = 800;
@@ -15,23 +15,23 @@ let placedCount = 0;
 const totalPieces = rows * cols;
 
 // -----------------------------
-// Random position OUTSIDE board IMPORTANT IMPORTANT IMPORTANTTTT
+//  scatter outside board and we cross our fingers and FUHHHCKING PRAY . 
 // -----------------------------
 function getRandomOutsideBoard() {
-    const padding = 20;
     const boardRect = board.getBoundingClientRect();
 
     let x, y;
 
     while (true) {
+
         x = Math.random() * (window.innerWidth - pieceWidth);
         y = Math.random() * (window.innerHeight - pieceHeight);
 
         const insideBoard =
-            x > boardRect.left - padding &&
-            x < boardRect.right + padding &&
-            y > boardRect.top - padding &&
-            y < boardRect.bottom + padding;
+            x > boardRect.left - 20 &&
+            x < boardRect.right + 20 &&
+            y > boardRect.top - 20 &&
+            y < boardRect.bottom + 20;
 
         if (!insideBoard) {
             return { x, y };
@@ -40,60 +40,36 @@ function getRandomOutsideBoard() {
 }
 
 // -----------------------------
-// Simple jigsaw-like shape
-// -----------------------------
-function getJigsawClip(row, col, rows, cols) {
-
-    const top = row === 0 ? 0 : (Math.random() > 0.5 ? 20 : -20);
-    const right = col === cols - 1 ? 100 : (Math.random() > 0.5 ? 120 : 80);
-    const bottom = row === rows - 1 ? 100 : (Math.random() > 0.5 ? 120 : 80);
-    const left = col === 0 ? 0 : (Math.random() > 0.5 ? 20 : -20);
-
-    return `
-        polygon(
-            0% ${top}%,
-            ${right}% 0%,
-            100% ${bottom}%,
-            ${left}% 100%
-        )
-    `;
-}
-
-// -----------------------------
-// Create pieces
+// CREATE PIECES
 // -----------------------------
 for (let row = 0; row < rows; row++) {
     for (let col = 0; col < cols; col++) {
 
         const piece = document.createElement("div");
+
         piece.classList.add("piece");
 
         piece.style.width = pieceWidth + "px";
         piece.style.height = pieceHeight + "px";
 
-        // image mapping
         piece.style.backgroundImage = `url(${imageSrc})`;
         piece.style.backgroundSize = `${boardWidth}px ${boardHeight}px`;
 
         piece.style.backgroundPosition =
             `-${col * pieceWidth}px -${row * pieceHeight}px`;
 
-        // correct position
         const correctX = col * pieceWidth;
         const correctY = row * pieceHeight;
 
         piece.dataset.correctX = correctX;
         piece.dataset.correctY = correctY;
 
-        // scatter outside board
+        // -----------------------------
+        // UPDATED SPAWN 
+        // -----------------------------
         const pos = getRandomOutsideBoard();
         piece.style.left = pos.x + "px";
         piece.style.top = pos.y + "px";
-
-        // jigsaw look
-        const clip = getJigsawClip(row, col, rows, cols);
-        piece.style.clipPath = clip;
-        piece.style.webkitClipPath = clip;
 
         board.appendChild(piece);
 
@@ -102,7 +78,7 @@ for (let row = 0; row < rows; row++) {
 }
 
 // -----------------------------
-// Drag logic
+// DRAG LOGIC 
 // -----------------------------
 function enableDrag(piece) {
 
@@ -126,6 +102,7 @@ function enableDrag(piece) {
     }
 
     function drag(e) {
+
         if (!dragging) return;
 
         piece.style.left = (e.clientX - offsetX) + "px";
@@ -167,16 +144,18 @@ function enableDrag(piece) {
 }
 
 // -----------------------------
-// Completion
+// COMPLETION POPUP
 // -----------------------------
 function completePuzzle() {
 
     const modal = document.getElementById("modal");
+
     modal.classList.add("show");
 
     document
         .getElementById("continueBtn")
         .onclick = () => {
+
             window.location.href =
                 "https://x.com/RLTelepath/status/2062267162488627206?s=20";
         };
