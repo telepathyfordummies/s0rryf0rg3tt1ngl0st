@@ -15,7 +15,7 @@ let placedCount = 0;
 const totalPieces = rows * cols;
 
 // -----------------------------
-//  scatter outside board and we cross our fingers and FUHHHCKING PRAY . 
+// scatter outside board ok this is actualy right dont fw this again 
 // -----------------------------
 function getRandomOutsideBoard() {
     const boardRect = board.getBoundingClientRect();
@@ -23,7 +23,6 @@ function getRandomOutsideBoard() {
     let x, y;
 
     while (true) {
-
         x = Math.random() * (window.innerWidth - pieceWidth);
         y = Math.random() * (window.innerHeight - pieceHeight);
 
@@ -33,9 +32,7 @@ function getRandomOutsideBoard() {
             y > boardRect.top - 20 &&
             y < boardRect.bottom + 20;
 
-        if (!insideBoard) {
-            return { x, y };
-        }
+        if (!insideBoard) return { x, y };
     }
 }
 
@@ -46,7 +43,6 @@ for (let row = 0; row < rows; row++) {
     for (let col = 0; col < cols; col++) {
 
         const piece = document.createElement("div");
-
         piece.classList.add("piece");
 
         piece.style.width = pieceWidth + "px";
@@ -58,15 +54,13 @@ for (let row = 0; row < rows; row++) {
         piece.style.backgroundPosition =
             `-${col * pieceWidth}px -${row * pieceHeight}px`;
 
+        // IMPORTANT: correct position RELATIVE TO BOARD
         const correctX = col * pieceWidth;
         const correctY = row * pieceHeight;
 
         piece.dataset.correctX = correctX;
         piece.dataset.correctY = correctY;
 
-        // -----------------------------
-        // UPDATED SPAWN 
-        // -----------------------------
         const pos = getRandomOutsideBoard();
         piece.style.left = pos.x + "px";
         piece.style.top = pos.y + "px";
@@ -78,12 +72,12 @@ for (let row = 0; row < rows; row++) {
 }
 
 // -----------------------------
-// DRAG LOGIC 
+// DRAG LOGIC
 // -----------------------------
 function enableDrag(piece) {
 
-    let offsetX;
-    let offsetY;
+    let offsetX = 0;
+    let offsetY = 0;
     let dragging = false;
 
     piece.addEventListener("mousedown", startDrag);
@@ -102,7 +96,6 @@ function enableDrag(piece) {
     }
 
     function drag(e) {
-
         if (!dragging) return;
 
         piece.style.left = (e.clientX - offsetX) + "px";
@@ -110,17 +103,20 @@ function enableDrag(piece) {
     }
 
     function stopDrag() {
-
         dragging = false;
 
         document.removeEventListener("mousemove", drag);
         document.removeEventListener("mouseup", stopDrag);
 
+        //  THIS MAY BE THE FIX OR IM GRABBING THE GUN BOARDSPACE
+        const boardRect = board.getBoundingClientRect();
+        const pieceRect = piece.getBoundingClientRect();
+
+        const currentX = pieceRect.left - boardRect.left;
+        const currentY = pieceRect.top - boardRect.top;
+
         const correctX = Number(piece.dataset.correctX);
         const correctY = Number(piece.dataset.correctY);
-
-        const currentX = piece.offsetLeft;
-        const currentY = piece.offsetTop;
 
         const distance = Math.hypot(
             currentX - correctX,
@@ -129,14 +125,18 @@ function enableDrag(piece) {
 
         if (distance < 20) {
 
+            // snap into exact board position
             piece.style.left = correctX + "px";
             piece.style.top = correctY + "px";
 
-            piece.dataset.locked = true;
+            piece.dataset.locked = "true";
 
             placedCount++;
 
+            console.log("Placed:", placedCount, "/", totalPieces);
+
             if (placedCount === totalPieces) {
+                console.log("PUZZLE COMPLETE");
                 completePuzzle();
             }
         }
