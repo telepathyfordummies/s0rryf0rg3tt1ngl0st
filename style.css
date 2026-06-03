@@ -23,7 +23,7 @@ h1 {
 
 .piece {
     position: absolute;
-    z-index: 999;
+    z-index: 800;
 }
 
 #modal {
@@ -33,10 +33,12 @@ h1 {
     display: none;              /**why are you broke**/
     justify-content: center;
     align-items: center;
+     z-index: 999;
 }
 
 #modal.show {
     display: flex;
+    z-index: 999;
 }
 
 .modal-content {
