@@ -115,14 +115,14 @@ function completePuzzle() {
 
     const modal = document.getElementById("modal");
 
-    modal.classList.remove("hidden");
+    modal.classList.add("show");
 
     document
         .getElementById("continueBtn")
         .addEventListener("click", () => {
 
             window.location.href =
-                "https://YOUR-WEBSITE-HERE.com";
+                "https://test.com";
 
         });
 }
