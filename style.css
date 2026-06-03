@@ -1,0 +1,53 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #222;
+    color: white;
+    text-align: center;
+}
+
+h1 {
+    margin: 20px;
+}
+
+#board {
+    width: 1000px;
+    height: 800px;
+    margin: auto;
+    position: relative;
+    border: 3px solid white;
+    background: #111;
+    overflow: hidden;
+}
+
+.piece {
+    position: absolute;
+    cursor: grab;
+    border: 1px solid rgba(255,255,255,.15);
+}
+
+.hidden {
+    display: none;
+}
+
+#modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.75);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background: white;
+    color: black;
+    padding: 30px;
+    border-radius: 12px;
+}
+
+button {
+    padding: 12px 24px;
+    font-size: 16px;
+    cursor: pointer;
+}
