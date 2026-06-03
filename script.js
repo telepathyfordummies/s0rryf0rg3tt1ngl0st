@@ -1,7 +1,7 @@
 const board = document.getElementById("board");
 
-const rows = 2;
-const cols = 2;
+const rows = 2;   // move back up when done testing 
+const cols = 2;   // same as above ho you know how to read
 
 const boardWidth = 1000;
 const boardHeight = 800;
@@ -14,33 +14,86 @@ const imageSrc = "puzzle.png";
 let placedCount = 0;
 const totalPieces = rows * cols;
 
+// -----------------------------
+// Random position OUTSIDE board IMPORTANT IMPORTANT IMPORTANTTTT
+// -----------------------------
+function getRandomOutsideBoard() {
+    const padding = 20;
+    const boardRect = board.getBoundingClientRect();
+
+    let x, y;
+
+    while (true) {
+        x = Math.random() * (window.innerWidth - pieceWidth);
+        y = Math.random() * (window.innerHeight - pieceHeight);
+
+        const insideBoard =
+            x > boardRect.left - padding &&
+            x < boardRect.right + padding &&
+            y > boardRect.top - padding &&
+            y < boardRect.bottom + padding;
+
+        if (!insideBoard) {
+            return { x, y };
+        }
+    }
+}
+
+// -----------------------------
+// Simple jigsaw-like shape
+// -----------------------------
+function getJigsawClip(row, col, rows, cols) {
+
+    const top = row === 0 ? 0 : (Math.random() > 0.5 ? 20 : -20);
+    const right = col === cols - 1 ? 100 : (Math.random() > 0.5 ? 120 : 80);
+    const bottom = row === rows - 1 ? 100 : (Math.random() > 0.5 ? 120 : 80);
+    const left = col === 0 ? 0 : (Math.random() > 0.5 ? 20 : -20);
+
+    return `
+        polygon(
+            0% ${top}%,
+            ${right}% 0%,
+            100% ${bottom}%,
+            ${left}% 100%
+        )
+    `;
+}
+
+// -----------------------------
+// Create pieces
+// -----------------------------
 for (let row = 0; row < rows; row++) {
     for (let col = 0; col < cols; col++) {
 
         const piece = document.createElement("div");
-
         piece.classList.add("piece");
 
         piece.style.width = pieceWidth + "px";
         piece.style.height = pieceHeight + "px";
 
+        // image mapping
         piece.style.backgroundImage = `url(${imageSrc})`;
         piece.style.backgroundSize = `${boardWidth}px ${boardHeight}px`;
 
         piece.style.backgroundPosition =
             `-${col * pieceWidth}px -${row * pieceHeight}px`;
 
+        // correct position
         const correctX = col * pieceWidth;
         const correctY = row * pieceHeight;
 
         piece.dataset.correctX = correctX;
         piece.dataset.correctY = correctY;
 
-        piece.style.left =
-            Math.random() * (boardWidth - pieceWidth) + "px";
+        // scatter outside board
+        const pos = getRandomOutsideBoard();
+        piece.style.left = pos.x + "px";
+        piece.style.top = pos.y + "px";
 
-        piece.style.top =
-            Math.random() * (boardHeight - pieceHeight) + "px";
+        // jigsaw look
+        const clip = getJigsawClip(row, col, rows, cols);
+        piece.style.clipPath = clip;
+        piece.style.webkitClipPath = clip;
 
         board.appendChild(piece);
 
@@ -48,6 +101,9 @@ for (let row = 0; row < rows; row++) {
     }
 }
 
+// -----------------------------
+// Drag logic
+// -----------------------------
 function enableDrag(piece) {
 
     let offsetX;
@@ -70,7 +126,6 @@ function enableDrag(piece) {
     }
 
     function drag(e) {
-
         if (!dragging) return;
 
         piece.style.left = (e.clientX - offsetX) + "px";
@@ -111,18 +166,18 @@ function enableDrag(piece) {
     }
 }
 
+// -----------------------------
+// Completion
+// -----------------------------
 function completePuzzle() {
 
     const modal = document.getElementById("modal");
-
     modal.classList.add("show");
 
     document
         .getElementById("continueBtn")
-        .addEventListener("click", () => {
-
+        .onclick = () => {
             window.location.href =
                 "https://x.com/RLTelepath/status/2062267162488627206?s=20";
-
-        });
+        };
 }
