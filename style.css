@@ -23,7 +23,7 @@ h1 {
 
 .piece {
     position: absolute;
-    z-index: 3;
+    z-index: 999;
 }
 
 .hidden {
