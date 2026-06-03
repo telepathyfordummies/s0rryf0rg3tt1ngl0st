@@ -10,20 +10,20 @@ h1 {
     margin: 20px;
 }
 
+#playArea {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+}
+
 #board {
-    width: 1000px;
-    height: 800px;
-    margin: auto;
     position: relative;
-    border: 3px solid white;
-    background: #111;
-    overflow: hidden;
+    z-index: 2;
 }
 
 .piece {
     position: absolute;
-    cursor: grab;
-    border: 1px solid rgba(255,255,255,.15);
+    z-index: 3;
 }
 
 .hidden {
