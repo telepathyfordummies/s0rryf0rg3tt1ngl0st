@@ -122,7 +122,7 @@ function completePuzzle() {
         .addEventListener("click", () => {
 
             window.location.href =
-                "https://test.com";
+                "https://x.com/RLTelepath/status/2062267162488627206?s=20";
 
         });
 }
