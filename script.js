@@ -9,7 +9,7 @@ const boardHeight = 800;
 const pieceWidth = boardWidth / cols;
 const pieceHeight = boardHeight / rows;
 
-const imageSrc = "puzzle.jpg";
+const imageSrc = "puzzle.png";
 
 let placedCount = 0;
 const totalPieces = rows * cols;
