@@ -26,12 +26,11 @@ h1 {
     z-index: 999;
 }
 
-
 #modal {
     position: fixed;
     inset: 0;
     background: rgba(0,0,0,.75);
-    display: none;             
+    display: none;              /**why are you broke**/
     justify-content: center;
     align-items: center;
 }
