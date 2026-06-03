@@ -31,12 +31,16 @@ h1 {
 }
 
 #modal {
+    display: none;
     position: fixed;
     inset: 0;
     background: rgba(0,0,0,.75);
-    display: flex;
     justify-content: center;
     align-items: center;
+}
+
+#modal.show {
+    display: flex;
 }
 
 .modal-content {
