@@ -13,6 +13,11 @@ h1 {
 
 #board {
     position: relative;
+    width: 1000px;
+    height: 800px;
+    margin: 20px auto;
+    border: 3px solid white;
+    background: #111;
     z-index: 2;
 }
 
