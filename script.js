@@ -1,7 +1,7 @@
 const board = document.getElementById("board");
 
-const rows = 8;
-const cols = 10;
+const rows = 2;
+const cols = 2;
 
 const boardWidth = 1000;
 const boardHeight = 800;
