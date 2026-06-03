@@ -26,9 +26,6 @@ h1 {
     z-index: 999;
 }
 
-.hidden {
-    display: none;
-}
 
 #modal {
     display: none;
