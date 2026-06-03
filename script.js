@@ -152,11 +152,8 @@ function completePuzzle() {
 
     modal.classList.add("show");
 
-    document
-        .getElementById("continueBtn")
-        .onclick = () => {
-
-            window.location.href =
-                "https://x.com/RLTelepath/status/2062267162488627206?s=20";
-        };
+    document.getElementById("continueBtn").onclick = () => {
+        window.location.href =
+            "https://x.com/RLTelepath/status/2062267162488627206?s=20";
+    };
 }
