@@ -10,11 +10,6 @@ h1 {
     margin: 20px;
 }
 
-#playArea {
-    position: fixed;
-    inset: 0;
-    z-index: 1;
-}
 
 #board {
     position: relative;
