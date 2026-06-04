@@ -1,7 +1,7 @@
 const board = document.getElementById("board");
 
-const rows = 2;
-const cols = 2;
+const rows = 4;
+const cols = 4;
 
 const boardWidth = 1000;
 const boardHeight = 800;
@@ -123,7 +123,7 @@ function enableDrag(piece) {
             currentY - correctY
         );
 
-        if (distance < 20) {
+        if (distance < 40) {
 
             // snap into exact board position
             piece.style.left = correctX + "px";
