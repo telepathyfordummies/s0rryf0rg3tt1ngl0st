@@ -28,28 +28,53 @@ h1 {
 
 #modal {
     position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,.75);
-    display: none;              /**why are you broke**/
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    display: none;
     justify-content: center;
     align-items: center;
-     z-index: 999;
+    z-index: 1000;
 }
 
 #modal.show {
     display: flex;
-    z-index: 999;
 }
 
 .modal-content {
-    background: white;
+    background: #e0e0e0;
+    border: 2px solid #4a90e2;
+    width: 300px;
+    text-align: center;
+    font-family: 'courier', Tahoma, Geneva, Verdana, sans-serif;
+    position: relative;
+    border-radius: 4px;
     color: black;
-    padding: 30px;
-    border-radius: 12px;
 }
 
-button {
-    padding: 12px 24px;
-    font-size: 16px;
+.popup-header {
+    background-color: #4a90e2;
+    color: white;
+    padding: 5px 10px;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #000;
+    border-radius: 4px 4px 0 0;
+}
+
+.modal-content p {
+    margin: 15px 0;
+}
+
+.modal-content button {
+    margin: 10px 5px 15px 5px;
+    padding: 5px 12px;
+    background: #c0c0c0;
+    border: 1px solid #000;
     cursor: pointer;
+    font-weight: bold;
 }
