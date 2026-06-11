@@ -154,6 +154,6 @@ function completePuzzle() {
 
     document.getElementById("continueBtn").onclick = () => {
         window.location.href =
-            "https://x.com/RLTelepath/status/2062267162488627206?s=20";
+            "https://telepathyfordummies.github.io/s0rryf0rg3tt1ngl0st/story.html";
     };
 }
