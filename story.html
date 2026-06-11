@@ -84,14 +84,19 @@ body {
 
 .story {
 }
-    
-    #glitch {
+
+#glitch {
+    position: relative;
+
+    left: -200px;
+
+    width: calc(100% + 400px);
+
     font-family: monospace;
-    text-align: center;
     color: #4a90e2;
-    margin-left: -50px;
-    margin-right: -50px;
-    word-break: break-all;
+    white-space: pre;
+
+    overflow: hidden;
 }
     
 </style>
@@ -225,7 +230,7 @@ const words = [
 function scramble() {
     let output = "";
 
-    for (let line = 0; line < 70; line++) {
+    for (let line = 0; line < 333; line++) {
 
         let text = "";
 
