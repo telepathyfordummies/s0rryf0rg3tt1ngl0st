@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>The Rabbit and the Hare</title>
+
+<style>
+body {
+    margin: 0;
+    background: #f1f3f4;
+    font-family: serif;
+    display: flex;
+    justify-content: center;
+    padding: 50px 0;
+}
+
+/* workspace */
+.workspace {
+    position: relative;
+}
+
+/* ribbon god were praying this works */
+.ribbon {
+    position: absolute;
+    top: -10px;
+    right: 60px;
+    width: 30px;
+    height: 90px;
+    background: #b84a4a;
+}
+
+.ribbon::after {
+    content: "";
+    position: absolute;
+    bottom: -15px;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-left: 15px solid #b84a4a;
+    border-right: 15px solid #b84a4a;
+    border-bottom: 15px solid transparent;
+}
+
+/* paper area */
+.page {
+    width: 850px;
+    min-height: 1100px;
+    background: white;
+    box-shadow: 0 3px 15px rgba(0,0,0,0.15);
+    padding: 100px;
+    box-sizing: border-box;
+    line-height: 1.8;
+    color: #222;
+}
+
+/* story styling stuff */
+.title {
+    text-align: center;
+    font-size: 2em;
+    margin-bottom: 50px;
+}
+
+.story {
+    white-space: pre-wrap;
+}
+</style>
+</head>
+
+<body>
+
+<div class="workspace">
+
+    <div class="ribbon"></div>
+
+    <div class="page">
+
+        <div class="title"></div>
+
+        <div class="story">
+sorry for getting lost... 
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>
