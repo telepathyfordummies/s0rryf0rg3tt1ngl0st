@@ -211,16 +211,44 @@ body {
 
 <script>
 const chars =
-"ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*TAMMYTAMMYtammytammytammy";
+"ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*";
+
+const words = [
+    "TAMMY",
+    "HIM",
+    "HIM",
+    "HIM",
+    "SNOW",
+    "ERROR",
+    "run."
+];
 
 function scramble() {
-    let text = "";
+    let output = "";
 
-    for(let i = 0; i < 80; i++) {
-        text += chars[Math.floor(Math.random() * chars.length)];
+    for (let line = 0; line < 8; line++) {
+
+        let text = "";
+
+        for (let i = 0; i < 60; i++) {
+            text += chars[Math.floor(Math.random() * chars.length)];
+        }
+
+        if (Math.random() < 0.4) {
+            let word = words[Math.floor(Math.random() * words.length)];
+
+            let pos = Math.floor(Math.random() * (text.length - word.length));
+
+            text =
+                text.slice(0, pos) +
+                word +
+                text.slice(pos + word.length);
+        }
+
+        output += text + "\n";
     }
 
-    document.getElementById("glitch").textContent = text;
+    document.getElementById("glitch").textContent = output;
 }
 
 setInterval(scramble, 100);
