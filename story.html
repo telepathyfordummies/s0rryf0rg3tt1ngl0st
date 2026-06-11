@@ -86,17 +86,25 @@ body {
 }
 
 #glitch {
-    position: relative;
+    position: absolute;
 
-    left: -200px;
+    top: 420px; /* adjust to where break happens */
+    left: 0;
 
-    width: 1200px;
+    width: 100vw;
 
-    font-family: monospace;
-    color: #4a90e2;
     white-space: pre;
+    font-family: monospace;
 
-    overflow: hidden;
+    color: #4a90e2;
+    opacity: 0.90;
+
+    pointer-events: none;
+    z-index: 999;
+}
+
+.gap {
+    height: 300px; /* adjust to glitch */
 }
     
 </style>
@@ -115,7 +123,52 @@ body {
 </div>
     
     <div class="ribbon"></div>
+<div id="glitch"></div>
 
+<script>
+const chars =
+"ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*!";
+
+const words = [
+    "TAMMY",
+    "HIM",
+    "HIM",
+    "HIM",
+    "SNOW",
+    "ERROR",
+    "run."
+];
+
+function scramble() {
+    let output = "";
+
+    for (let line = 0; line < 333; line++) {
+
+        let text = "";
+
+        for (let i = 0; i < 60; i++) {
+            text += chars[Math.floor(Math.random() * chars.length)];
+        }
+
+        if (Math.random() < 0.4) {
+            let word = words[Math.floor(Math.random() * words.length)];
+
+            let pos = Math.floor(Math.random() * (text.length - word.length));
+
+            text =
+                text.slice(0, pos) +
+                word +
+                text.slice(pos + word.length);
+        }
+
+        output += text + "\n";
+    }
+
+    document.getElementById("glitch").textContent = output;
+}
+
+setInterval(scramble, 90);
+</script>
     <div class="page">
 
         <div class="title">Our Design</div>
@@ -211,52 +264,7 @@ body {
 
 <p><span>She turned the corner without looking. </span><em><span>“Mom!”</span></em><span> </span></p>
 
-<p><div id="glitch"></div>
-
-<script>
-const chars =
-"ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*!";
-
-const words = [
-    "TAMMY",
-    "HIM",
-    "HIM",
-    "HIM",
-    "SNOW",
-    "ERROR",
-    "run."
-];
-
-function scramble() {
-    let output = "";
-
-    for (let line = 0; line < 333; line++) {
-
-        let text = "";
-
-        for (let i = 0; i < 60; i++) {
-            text += chars[Math.floor(Math.random() * chars.length)];
-        }
-
-        if (Math.random() < 0.4) {
-            let word = words[Math.floor(Math.random() * words.length)];
-
-            let pos = Math.floor(Math.random() * (text.length - word.length));
-
-            text =
-                text.slice(0, pos) +
-                word +
-                text.slice(pos + word.length);
-        }
-
-        output += text + "\n";
-    }
-
-    document.getElementById("glitch").textContent = output;
-}
-
-setInterval(scramble, 90);
-</script></p>
+<p><div class="gap"></div></p>
 <p><span>Tammy stopped dead in her tracks, stomach dropping, heart kicking in her chest. She took a step back on instinct, chills running down her spine. Her mouth opened, but no words came out. </span></p>
 
 <p><span>She came face to face with familiarity, but he was wrong. She could see it in his eyes. </span></p>
