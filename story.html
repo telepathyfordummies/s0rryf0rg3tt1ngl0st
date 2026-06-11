@@ -205,8 +205,6 @@ body {
 
 <p><span>She turned the corner without looking. </span><em><span>“Mom!”</span></em><span> </span></p>
 
-<p> </p>
-
 <p><div id="glitch"></div>
 
 <script>
@@ -226,7 +224,7 @@ const words = [
 function scramble() {
     let output = "";
 
-    for (let line = 0; line < 8; line++) {
+    for (let line = 0; line < 20; line++) {
 
         let text = "";
 
@@ -251,11 +249,8 @@ function scramble() {
     document.getElementById("glitch").textContent = output;
 }
 
-setInterval(scramble, 100);
+setInterval(scramble, 90);
 </script></p>
-
-<p> </p>
-
 <p><span>Tammy stopped dead in her tracks, stomach dropping, heart kicking in her chest. She took a step back on instinct, chills running down her spine. Her mouth opened, but no words came out. </span></p>
 
 <p><span>She came face to face with familiarity, but he was wrong. She could see it in his eyes. </span></p>
